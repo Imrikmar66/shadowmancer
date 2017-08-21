@@ -4,12 +4,12 @@
 
 class Hexa extends Shape implements GameEventListener {
     
-    private events:Events;
+    private events:GameEvents;
     private occuped:Actor;
 
     constructor(size:number, point:Point){
         super(size, point, 6);
-        this.events = new Events(this);
+        this.events = new GameEvents(this);
         this.occuped = null;
     }
 
@@ -25,7 +25,7 @@ class Hexa extends Shape implements GameEventListener {
         return this.occuped;
     }
 
-    getEvents():Events {
+    getEvents():GameEvents {
         return this.events;
     }
 

@@ -16,7 +16,7 @@ class EnemiesManager {
     randomGenerated(grid:Grid, n:number):void {
         var rands:number[] = [];
         for(var i=0; i < n; i++){
-            let rand = Math.round(Math.random() * grid.getHexas().length);
+            let rand = Math.round(Math.random() * (grid.getHexas().length-1));
             if(
                 rands.indexOf(rand) > -1 
                 || DecorsManager.getInstance().getDecorOnHexa(grid.getHexas()[rand])

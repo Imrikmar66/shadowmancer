@@ -1,12 +1,18 @@
 /// <reference path="./Hexa.ts"/>
-abstract class Actor extends Renderable {
+abstract class Actor extends Renderable implements ActionEventListener {
 
     protected hexa:Hexa;
     protected id:string;
+    protected events:ActionEvents;
 
     constructor(){
         super();
         this.UUID();
+        this.events = new ActionEvents(this);
+    }
+
+    getEvents():ActionEvents{
+        return this.events;
     }
 
     UUID():void {
@@ -19,6 +25,7 @@ abstract class Actor extends Renderable {
 
         this.hexa = hexa;
         this.hexa.occupe(this);
+        this.events.move();
     }
 
     getHexa(): Hexa {

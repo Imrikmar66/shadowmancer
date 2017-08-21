@@ -11,6 +11,9 @@ var Grid = (function () {
         this.generateGrid();
         this.bindEvents();
     }
+    Grid.prototype.getSize = function () {
+        return this.size;
+    };
     Grid.prototype.getHexas = function () {
         return this.hexas;
     };

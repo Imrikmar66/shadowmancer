@@ -1,37 +1,30 @@
-class Events {
+class GameEvents extends GlobalEvents {
 
     protected ishover:boolean;
-    protected _onhover:Function;
-    protected _onunhover:Function;
     protected isclick:boolean;
-    protected _onclick:Function;
-    protected _onunclick:Function;
-    private listener:GameEventListener;
 
     constructor(listener:GameEventListener){
+        super(listener);
         this.ishover = false;
         this.isclick = false;
-        this.listener = listener;
     }
 
     onhover(callback:Function):void{
-        this._onhover = callback;
+        this.on("hover", callback);
     }
 
     onunhover(callback:Function):void{
-        this._onunhover = callback;
+        this.on("unhover", callback);
     }
 
     hover():void{
         this.ishover = true;
-        if(this._onhover)
-            this._onhover(this.listener);
+        this.trigger("hover");
     }
 
     unhover():void{
         this.ishover = false;
-        if(this._onunhover)
-            this._onunhover(this.listener);
+        this.trigger("unhover")
     }
 
     isHovered():boolean{
@@ -39,23 +32,21 @@ class Events {
     }
 
     onclick(callback:Function):void{
-        this._onclick = callback;
+        this.on("click", callback);
     }
 
     onunclick(callback:Function):void{
-        this._onunclick = callback;
+        this.on("unclick", callback);
     }
 
     click():void{
         this.isclick = true;
-        if(this._onclick)
-            this._onclick(this.listener);
+        this.trigger("click");
     }
 
     unclick():void{
         this.isclick = false;
-        if(this._onunclick)
-            this._onunclick(this.listener);
+        this.trigger("unclick");
     }
 
     isClicked():boolean{

@@ -13,8 +13,12 @@ var Actor = (function (_super) {
     function Actor() {
         var _this = _super.call(this) || this;
         _this.UUID();
+        _this.events = new ActionEvents(_this);
         return _this;
     }
+    Actor.prototype.getEvents = function () {
+        return this.events;
+    };
     Actor.prototype.UUID = function () {
         this.id = Date.now() + "" + Math.floor(Math.random() * 100000);
     };
@@ -23,6 +27,7 @@ var Actor = (function (_super) {
             this.hexa.leave();
         this.hexa = hexa;
         this.hexa.occupe(this);
+        this.events.move();
     };
     Actor.prototype.getHexa = function () {
         return this.hexa;

@@ -16,12 +16,6 @@ var Hero = (function (_super) {
         _this.weapon = "sword";
         return _this;
     }
-    Hero.prototype.getHexa = function () {
-        return this.hexa;
-    };
-    Hero.prototype.setHexa = function (hexa) {
-        this.hexa = hexa;
-    };
     Hero.prototype.getWeapon = function () {
         return this.weapon;
     };
@@ -38,7 +32,7 @@ var Hero = (function (_super) {
             return;
         ctx.beginPath();
         ctx.arc(this.hexa.getPoint().getX(), this.hexa.getPoint().getY(), 10, 0, 2 * Math.PI);
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = "#00f";
         ctx.fill();
     };
     return Hero;

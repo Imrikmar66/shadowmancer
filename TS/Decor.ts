@@ -4,13 +4,14 @@ class Decor extends Actor {
     
     constructor(){
         super();
+        this.traversable = false;
     }
 
     setTraversable(traversable:boolean){
         this.traversable = traversable;
     }
 
-    getTraversable():boolean {
+    isTraversable():boolean {
         return this.traversable ;
     }
 
@@ -21,7 +22,12 @@ class Decor extends Actor {
 
         ctx.beginPath();
         ctx.arc(this.hexa.getPoint().getX(),this.hexa.getPoint().getY(),10,0,2*Math.PI);
-        ctx.fillStyle = "#0ff";
+        
+        if(this.isTraversable())
+            ctx.fillStyle = "#0f0";
+        else
+            ctx.fillStyle = "#000";
+
         ctx.fill();
         
     }

@@ -12,7 +12,7 @@ var Hexa = (function (_super) {
     __extends(Hexa, _super);
     function Hexa(size, point) {
         var _this = _super.call(this, size, point, 6) || this;
-        _this.events = new Events(_this);
+        _this.events = new GameEvents(_this);
         _this.occuped = null;
         return _this;
     }

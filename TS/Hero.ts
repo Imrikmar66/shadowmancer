@@ -9,14 +9,6 @@ class Hero extends Actor {
         this.weapon = "sword";
     }
 
-    getHexa():Hexa {
-        return this.hexa;
-    }
-
-    setHexa(hexa:Hexa):void {
-        this.hexa = hexa;
-    }
-
     getWeapon():string {
         return this.weapon;
     }
@@ -36,7 +28,7 @@ class Hero extends Actor {
         
         ctx.beginPath();
         ctx.arc(this.hexa.getPoint().getX(),this.hexa.getPoint().getY(),10,0,2*Math.PI);
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = "#00f";
         ctx.fill();
     }
 

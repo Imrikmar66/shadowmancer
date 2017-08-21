@@ -7,10 +7,22 @@ var DecorsManager = (function () {
             DecorsManager.instance = new DecorsManager();
         return DecorsManager.instance;
     };
-    DecorsManager.prototype.randomGenerated = function (grid, n) {
+    DecorsManager.prototype.randomGenerated = function (grid, n1, n2) {
         var rands = [];
-        for (var i = 0; i < n; i++) {
-            var rand = Math.round(Math.random() * grid.getHexas().length);
+        for (var i = 0; i < n1; i++) {
+            var rand = Math.round(Math.random() * (grid.getHexas().length - 1));
+            if (rands.indexOf(rand) > -1)
+                i--;
+            else {
+                rands.push(rand);
+                var decor = new Decor();
+                decor.setTraversable(true);
+                decor.setHexa(grid.getHexas()[rand]);
+                this.decors.push(decor);
+            }
+        }
+        for (var i = 0; i < n2; i++) {
+            var rand = Math.round(Math.random() * (grid.getHexas().length - 1));
             if (rands.indexOf(rand) > -1)
                 i--;
             else {

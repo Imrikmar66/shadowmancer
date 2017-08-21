@@ -1,4 +1,3 @@
-/// <reference path="./Events.ts"/>
 /// <reference path="./Point.ts"/>
 /// <reference path="./Color.ts"/>
 

@@ -10,7 +10,7 @@ var EnemiesManager = (function () {
     EnemiesManager.prototype.randomGenerated = function (grid, n) {
         var rands = [];
         for (var i = 0; i < n; i++) {
-            var rand = Math.round(Math.random() * grid.getHexas().length);
+            var rand = Math.round(Math.random() * (grid.getHexas().length - 1));
             if (rands.indexOf(rand) > -1
                 || DecorsManager.getInstance().getDecorOnHexa(grid.getHexas()[rand]))
                 i--;

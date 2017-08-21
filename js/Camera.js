@@ -7,6 +7,12 @@ var Camera = (function () {
     Camera.prototype.getOffset = function () {
         return this.offset;
     };
+    Camera.prototype.follow = function (actor) {
+        var _this = this;
+        actor.getEvents().onmove(function (actor) {
+            _this.moveTo(actor.getHexa().getPoint());
+        });
+    };
     Camera.prototype.moveTo = function (point) {
         var _this = this;
         var offsetX = -(point.getX() - this.canvas.width / 2);

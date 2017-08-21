@@ -1,3 +1,3 @@
-interface GameEventListener{
-    getEvents():Events;
+interface GameEventListener extends GlobalEventListener {
+    getEvents():GlobalEvents;
 }

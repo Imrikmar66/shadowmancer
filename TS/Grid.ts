@@ -26,6 +26,10 @@ class Grid {
         this.bindEvents();
     }
 
+    getSize():number {
+        return this.size;
+    }
+
     getHexas():Hexa[]{
         return this.hexas;
     }

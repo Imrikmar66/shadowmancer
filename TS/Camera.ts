@@ -14,6 +14,12 @@ class Camera {
         return this.offset;
     }
 
+    follow(actor:Actor){
+        actor.getEvents().onmove( (actor:Actor) => {
+            this.moveTo(actor.getHexa().getPoint());
+        });
+    }
+
     moveTo(point:Point){
         var offsetX = - ( point.getX() - this.canvas.width/2 );
         var offsetY = - ( point.getY() - this.canvas.height/2 );

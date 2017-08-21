@@ -19,27 +19,38 @@ grid.globalOnclick(function(hexa:Hexa){
     hexa.setColor(new Color().red());
 
     if(!hero.getHexa()){
+        game.getCamera().follow(hero);
         hero.setHexa(hexa);
-        game.getCamera().moveTo(hexa.getPoint());
     }
-    else if(grid.areNext(hexa, hero.getHexa()) && hero.getWeapon() == "sword"){
-        let occuper:Actor = hexa.isOccuped();
+    else if( grid.areNext(hexa, hero.getHexa()) ){
 
-        /*if( occuper == null){
-            hero.setHexa(hexa);
-            game.getCamera().moveTo(hexa.getPoint())
-        }
-        else if(occuper.constructor.name == "Enemy"){
-            enemies.remove(occuper as Enemy);
-            //go to the next
-        }
-        else if(occuper.constructor.name == "Decor"){
-            //go to the next
-        }*/
+        if( hero.getWeapon() == "sword" ){
 
-        ray = new Ray(hero.getHexa().getPoint(), hexa.getPoint());
-        ray.cast(200);
-        console.log(ray);
+            let occuper:Actor = hexa.isOccuped();
+            let ray:Ray = new Ray(hero.getHexa().getPoint(), hexa.getPoint());
+            if( occuper == null){
+                hero.setHexa(hexa);
+            }
+            else if(Utils.getClass(occuper) == "Enemy"){
+                    
+                let point:Point = ray.cast(grid.getSize() * 2/*r to d*/ * 2/*nbr of case*/);
+                hexa = grid.getHexa(point);
+
+                if(hexa && !hexa.isOccuped()){
+                    enemies.remove(occuper as Enemy);
+                    //go to the next
+                    hero.setHexa(hexa);
+                }
+            }
+            else if(Utils.getClass(occuper) == "Decor"){
+                
+                let decor:Decor = occuper as Decor;
+                if(decor.isTraversable()){
+                    hero.setHexa(hexa);
+                }
+
+            }
+        }
     }
 });
 
@@ -48,7 +59,7 @@ grid.globalOnhover(function(hexa:Hexa){
         hexa.setColor(new Color().grey());
 });
 
-decors.randomGenerated(grid, 30);
+decors.randomGenerated(grid, 15, 15);
 enemies.randomGenerated(grid, 30);
 
 game.main(function(){

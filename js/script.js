@@ -10,21 +10,38 @@ grid.globalOnunhover(function (hexa) {
 grid.globalOnclick(function (hexa) {
     hexa.setColor(new Color().red());
     if (!hero.getHexa()) {
+        game.getCamera().follow(hero);
         hero.setHexa(hexa);
-        game.getCamera().moveTo(hexa.getPoint());
     }
-    else if (grid.areNext(hexa, hero.getHexa()) && hero.getWeapon() == "sword") {
-        var occuper = hexa.isOccuped();
-        ray = new Ray(hero.getHexa().getPoint(), hexa.getPoint());
-        ray.cast(200);
-        console.log(ray);
+    else if (grid.areNext(hexa, hero.getHexa())) {
+        if (hero.getWeapon() == "sword") {
+            var occuper = hexa.isOccuped();
+            var ray_1 = new Ray(hero.getHexa().getPoint(), hexa.getPoint());
+            if (occuper == null) {
+                hero.setHexa(hexa);
+            }
+            else if (Utils.getClass(occuper) == "Enemy") {
+                var point = ray_1.cast(grid.getSize() * 2 * 2);
+                hexa = grid.getHexa(point);
+                if (hexa && !hexa.isOccuped()) {
+                    enemies.remove(occuper);
+                    hero.setHexa(hexa);
+                }
+            }
+            else if (Utils.getClass(occuper) == "Decor") {
+                var decor = occuper;
+                if (decor.isTraversable()) {
+                    hero.setHexa(hexa);
+                }
+            }
+        }
     }
 });
 grid.globalOnhover(function (hexa) {
     if (!hexa.getEvents().isClicked())
         hexa.setColor(new Color().grey());
 });
-decors.randomGenerated(grid, 30);
+decors.randomGenerated(grid, 15, 15);
 enemies.randomGenerated(grid, 30);
 game.main(function () {
     grid.render(game);

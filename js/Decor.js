@@ -11,12 +11,14 @@ var __extends = (this && this.__extends) || (function () {
 var Decor = (function (_super) {
     __extends(Decor, _super);
     function Decor() {
-        return _super.call(this) || this;
+        var _this = _super.call(this) || this;
+        _this.traversable = false;
+        return _this;
     }
     Decor.prototype.setTraversable = function (traversable) {
         this.traversable = traversable;
     };
-    Decor.prototype.getTraversable = function () {
+    Decor.prototype.isTraversable = function () {
         return this.traversable;
     };
     Decor.prototype.renderer = function (ctx) {
@@ -24,7 +26,10 @@ var Decor = (function (_super) {
             return;
         ctx.beginPath();
         ctx.arc(this.hexa.getPoint().getX(), this.hexa.getPoint().getY(), 10, 0, 2 * Math.PI);
-        ctx.fillStyle = "#0ff";
+        if (this.isTraversable())
+            ctx.fillStyle = "#0f0";
+        else
+            ctx.fillStyle = "#000";
         ctx.fill();
     };
     return Decor;

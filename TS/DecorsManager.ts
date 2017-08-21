@@ -13,10 +13,22 @@ class DecorsManager {
         this.decors = [];
     }
 
-    randomGenerated(grid:Grid, n:number):void {
+    randomGenerated(grid:Grid, n1:number, n2:number):void {
         var rands:number[] = [];
-        for(var i=0; i < n; i++){
-            let rand = Math.round(Math.random() * grid.getHexas().length);
+        for(var i=0; i < n1; i++){
+            let rand = Math.round(Math.random() * (grid.getHexas().length - 1));
+            if(rands.indexOf(rand) > -1 )
+                i--;
+            else{
+                rands.push(rand);
+                let decor = new Decor();
+                decor.setTraversable(true);
+                decor.setHexa(grid.getHexas()[rand]);
+                this.decors.push(decor);
+            }
+        }
+        for(var i=0; i < n2; i++){
+            let rand = Math.round(Math.random() * (grid.getHexas().length - 1));
             if(rands.indexOf(rand) > -1 )
                 i--;
             else{
