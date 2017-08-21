@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "outDir": "./js",
+        "sourceMap": true,
+        "watch": true
+    },
+    "compileOnSave": true,
+    "include": [
+        "TS/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
